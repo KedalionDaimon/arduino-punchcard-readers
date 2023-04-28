@@ -1,144 +1,83 @@
 //cut-off at 700-750
+//I'm going to preface this by saying I only looked at the documentation and didn't check for errors in a compiler because I'm learning lisp atm
+//You can also use hash tables because it will be a lot faster look-up time with pointers
+//the intention is more for style and to take out the repetition with for loops
 
 #define THRESH 750
 
-int b1 = 0;
-int b2 = 0;
-int b3 = 0;
-int b4 = 0;
-int b5 = 0;
-int b6 = 0;
-int b7 = 0;
-int b8 = 0;
-int b9 = 0;
+;;define your lines of binary as 0
+int 8bitArray[] = {b1, b2, b3, b4, b5, b6, b7, b8};
 short waszero = 0;
 
-char ch = 0;
+void printCharArray() {
+      //prints everything in the array
+      for (int i=0; i = length(pinArray); i++) {
+            Serial.print(8bitArray[i]);
+            }
+
+      if (ch < 128) {
+            Serial.print("    ");
+            Serial.print(ch);
+            }
+            Serial.println("");
+            }
+}
+
+void check_light_shines_through (8bitArray) 
+{
+      for (i = 0 ; i = length(8bitArray); i++) {
+        //check if point in the array is less then the threshhold and set the binary
+        if (i > THRESH && waszero == 1) {
+            waszero = 0;
+            i = 1 || i = 0;
+        //you can try using == 1 to make it a boolean truth
+        }
+}
+
+//defining pinArray[]
+int pinArray[] = {A1, A2, A3, A4, A5, A6, A7, A8};
+
+void loop_pins(pinArray) {
+      for (i = 0; i = length(pinArray); i++) {
+      pinMode(i,INPUT);
+      }
 
 void setup() {
-
-  Serial.begin(9600);
-
-  pinMode(A0,INPUT);
-  pinMode(A1,INPUT);
-  pinMode(A2,INPUT);
-  pinMode(A3,INPUT);
-  pinMode(A4,INPUT);
-  pinMode(A5,INPUT);
-  pinMode(A6,INPUT);
-  pinMode(A7,INPUT);
-  pinMode(A8,INPUT);
-  Serial.println("Ready to read card.");
+      Serial.begin(9600);
+      loop_pins(pinArray);
+      Serial.println("Ready to read card.");
 }
 
 void loop() {
+      //set 8pins value to 8bitArray
+      //setting an array to another array might not serve a function and jut take up space, not sure if it will break if done directly
+      //maybe it will work with just 1 array but this is the for loop for setting a array to an array
 
-    b1 = analogRead(A0);
-    b2 = analogRead(A1);
-    b3 = analogRead(A2);
-    b4 = analogRead(A3);
-    b5 = analogRead(A4);
-    b6 = analogRead(A5);
-    b7 = analogRead(A6);
-    b8 = analogRead(A7);
-
-    b9 = analogRead(A8);
-
-    /*
-    Serial.print(b1);
-    Serial.print("    ");
-    Serial.print(b2);
-    Serial.print("    ");
-    Serial.print(b3);
-    Serial.print("    ");
-    Serial.print(b4);
-    Serial.print("    ");
-    Serial.print(b5);
-    Serial.print("    ");
-    Serial.print(b6);
-    Serial.print("    ");
-    Serial.print(b7);
-    Serial.print("    ");
-    Serial.print(b8);
-    Serial.print("    ");
-    Serial.println(b9);
-    */
-
-    if (b9 > THRESH) {
-      if (waszero == 1) {
-
-        waszero = 0;
-        
-        if (b1 > THRESH) {
-          b1 = 1;
-        } else {
-          b1 = 0;
+      for (int i=0; i = length(pinArray); i++) {
+          8bitArray[i] = analogRead(pinArray[i]);
         }
 
-        if (b2 > THRESH) {
-          b2 = 1;
-        } else {
-          b2 = 0;
-        }
+      check_light_shines_through(8bitArray);
+      //its important to check if the scope still applies (although it should)
 
-        if (b3 > THRESH) {
-          b3 = 1;
-        } else {
-          b3 = 0;
-        }
+      //assigning character codes
+      char ch = 1*8bitArray[8] + 2*8bitArray[7] + 4*8bitArray[6] + 8*8bitArray[5] + 16*8bitArray[4]+ 32*8bitArray[3] + 64*8bitArray[2]+ 128*8bitArray[1];
+      //might get a type error by assigning an int to a char but the documentation says its ok because of ascii values!
 
-        if (b4 > THRESH) {
-          b4 = 1;
-        } else {
-          b4 = 0;
-        }
+      void printCharArray() {
+            //prints everything in the array
+            for (int i=0; i = length(pinArray); i++) {
+                  Serial.print(8bitArray[i]);
+                  }
+            if (ch < 128) {
+                  Serial.print("    ");
+                  Serial.print(ch);
+                   }
+            Serial.println("");
+            }
+            
+           printCharArray();
 
-        if (b5 > THRESH) {
-          b5 = 1;
-        } else {
-          b5 = 0;
-        }
-
-        if (b6 > THRESH) {
-          b6 = 1;
-        } else {
-          b6 = 0;
-        }
-
-        if (b7 > THRESH) {
-          b7 = 1;
-        } else {
-          b7 = 0;
-        }
-
-        if (b8 > THRESH) {
-          b8 = 1;
-        } else {
-          b8 = 0;
-        }
-
-        ch = 1*b8 + 2*b7 + 4*b6 + 8*b5 + 16*b4 + 32*b3 + 64*b2 + 128*b1;
-
-        Serial.print(b1);
-        Serial.print(b2);
-        Serial.print(b3);
-        Serial.print(b4);
-        Serial.print(b5);
-        Serial.print(b6);
-        Serial.print(b7);
-        Serial.print(b8);
-        if (ch < 128) {
-          Serial.print("    ");
-          Serial.print(ch);
-        }
-        Serial.println("");
-
-      }
-    } else {
-      waszero = 1;
-    }
-
-    
+            }
     delay(10);
-
 }
